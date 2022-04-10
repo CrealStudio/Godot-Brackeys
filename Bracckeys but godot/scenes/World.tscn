@@ -1,0 +1,115 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Floor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/World.gd" type="Script" id=3]
+[ext_resource path="res://scenes/HitObjects.tscn" type="PackedScene" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 8, 4, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 6.25308, 4.24265, 1.70688 )
+
+[sub_resource type="Environment" id=3]
+background_mode = 1
+background_color = Color( 0.705882, 0.705882, 0.705882, 0.682353 )
+background_energy = 0.0
+ambient_light_color = Color( 0.992157, 0.901961, 0.709804, 1 )
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0.764706, 0.768627, 0.768627, 1 )
+fog_sun_color = Color( 0.964706, 0.654902, 0.168627, 1 )
+fog_depth_begin = 80.0
+fog_depth_end = 90.0
+fog_depth_curve = 0.378931
+fog_transmit_curve = 1.41421
+fog_height_enabled = true
+fog_height_min = 0.7
+dof_blur_far_enabled = true
+dof_blur_far_distance = 44.69
+dof_blur_far_transition = 556.2
+dof_blur_far_amount = 0.14
+glow_intensity = 1.66
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="CubeMesh" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.215686, 0.215686, 0.215686, 0.211765 )
+
+[node name="World" type="Spatial"]
+script = ExtResource( 3 )
+HitObjects = ExtResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1.2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 7.75616 )
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.0132792, 0, 0, -49.4233 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.275031, 3.42905, -24.6046 )
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.993657, 0.112457, 0, -0.112457, 0.993657, -0.0388412, 11.1737, 24.4079 )
+current = true
+
+[node name="SpawnPoints" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6499, -110.221 )
+
+[node name="P1" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.64654, 0, -46.782 )
+
+[node name="P2" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.207118, 0, -46.782 )
+
+[node name="P3" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.78803, 0, -46.782 )
+
+[node name="Timer" type="Timer" parent="SpawnPoints"]
+wait_time = 0.5
+
+[node name="Area2" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105888, 0.746415, 17.0138 )
+shape = SubResource( 2 )
+
+[node name="Floor" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1.4, 0, 0, 0, 1.003, 0, 0, 0, 2.303, 0, 0, -98.7928 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
+
+[node name="Wall" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 20, 0, 0, 0, 131.112, -12.6502, 18.0352, -115.24 )
+visible = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.374184, 0, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="Wall2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 20, 0, 0, 0, 131.112, 11.3656, 18.0352, -115.24 )
+visible = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Wall2"]
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Wall2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.374184, 0, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="timeout" from="SpawnPoints/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Area2" to="." method="_on_Area2_body_entered"]
