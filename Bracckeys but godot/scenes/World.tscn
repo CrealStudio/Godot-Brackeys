@@ -90,11 +90,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.207118, 0, -46.782 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.78803, 0, -46.782 )
 
 [node name="Timer" type="Timer" parent="SpawnPoints"]
-wait_time = 0.5
 
-[node name="Area2" type="Area" parent="."]
+[node name="DelArea" type="Area" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="Area2"]
+[node name="CollisionShape" type="CollisionShape" parent="DelArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105888, 0.746415, 17.0138 )
 shape = SubResource( 2 )
 
@@ -144,37 +143,44 @@ custom_fonts/font = SubResource( 7 )
 text = "Score: 0"
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
+pause_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="MainMenu"]
+[node name="Control" type="Control" parent="MainMenu"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu/Control"]
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.231373, 0.231373, 0.231373, 0.505882 )
 
-[node name="Label" type="Label" parent="MainMenu"]
+[node name="Label" type="Label" parent="MainMenu/Control"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -235.0
-margin_right = 235.0
+margin_left = 257.0
+margin_right = 727.0
 margin_bottom = 120.0
 theme = SubResource( 9 )
 text = "UNTITLED GAME"
 align = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -125.0
-margin_top = -60.0
-margin_right = 125.0
-margin_bottom = 40.0
+margin_left = 367.0
+margin_top = 220.0
+margin_right = 617.0
+margin_bottom = 360.0
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
 custom_constants/separation = 20
 alignment = 1
 
-[node name="Play" type="Button" parent="MainMenu/VBoxContainer"]
+[node name="Play" type="Button" parent="MainMenu/Control/VBoxContainer"]
 margin_right = 250.0
 margin_bottom = 60.0
 size_flags_vertical = 2
@@ -182,7 +188,7 @@ size_flags_stretch_ratio = 0.0
 theme = ExtResource( 6 )
 text = "PLAY"
 
-[node name="Quit" type="Button" parent="MainMenu/VBoxContainer"]
+[node name="Quit" type="Button" parent="MainMenu/Control/VBoxContainer"]
 margin_top = 80.0
 margin_right = 250.0
 margin_bottom = 140.0
@@ -191,4 +197,6 @@ text = "QUIT"
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="timeout" from="SpawnPoints/Timer" to="." method="_on_Timer_timeout"]
-[connection signal="body_entered" from="Area2" to="." method="_on_Area2_body_entered"]
+[connection signal="body_entered" from="DelArea" to="." method="_on_Area2_body_entered"]
+[connection signal="pressed" from="MainMenu/Control/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="MainMenu/Control/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
