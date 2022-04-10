@@ -12,8 +12,8 @@ func _ready():
 	
 func _process(delta):
 	time_now = OS.get_unix_time()
-	var score = time_now - time_start
-	print(score)
+	score = time_now - time_start
+
 	
 
 

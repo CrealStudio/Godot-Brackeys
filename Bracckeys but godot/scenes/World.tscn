@@ -116,7 +116,6 @@ material/0 = SubResource( 6 )
 [node name="ScoreTimer" type="Timer" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_enable = true
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 margin_right = 40.0
