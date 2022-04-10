@@ -10,23 +10,24 @@ onready var ScoreLabel = $CanvasLayer/Label
 var SpawnFrequency : float = .5
 
 func _process(delta):
-	ScoreLabel.text = "Score: " + str(Global.score)
+	if Global.CanCount:
+		ScoreLabel.text = "Score: " + str(Global.score)
 
 func _on_Area_body_entered(body):
-	if body.is_in_group("Player"):
-		pass
+	pass
 
 func _ready():
 	SpawnTimer.wait_time = SpawnFrequency
 	SpawnTimer.start(SpawnFrequency)
 
 func spawnObjects():
-	var Blocks = HitObjects.instance()
-	add_child(Blocks)
-	var spawn_choices = [spawn1, spawn2, spawn3]
-	var i = randi() % spawn_choices.size()
-	Blocks.global_transform = spawn_choices[i].global_transform
-	Blocks.scale.x = rand_range(1, 4)
+	if Global.CanSpawn:
+		var Blocks = HitObjects.instance()
+		add_child(Blocks)
+		var spawn_choices = [spawn1, spawn2, spawn3]
+		var i = randi() % spawn_choices.size()
+		Blocks.global_transform = spawn_choices[i].global_transform
+		Blocks.scale.x = rand_range(1, 4)
 
 func _on_Timer_timeout():
 	spawnObjects()
