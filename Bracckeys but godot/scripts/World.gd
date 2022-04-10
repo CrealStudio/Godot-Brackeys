@@ -6,14 +6,11 @@ onready var spawn1 : Node = $SpawnPoints/P1
 onready var spawn2 : Node = $SpawnPoints/P2
 onready var spawn3 : Node = $SpawnPoints/P3
 onready var SpawnTimer : Node = $SpawnPoints/Timer
+onready var ScoreLabel = $CanvasLayer/Label
 var SpawnFrequency : float = .5
 
-#spawn_choices = [point1, point2, point3]
-#var i = randi() % spawn_choices.size()        #give a number between 0 and the amount of array slots - 1
-#spawn_location = spawn_choices[i]
-
-var ground = preload("res://scenes/Floor.tscn")
-
+func _process(delta):
+	ScoreLabel.text = "Score: " + str(Global.score)
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("Player"):
