@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Floor.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/HitObjects.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/font/BebasNeue-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://scenes/button_theme.tres" type="Theme" id=6]
+[ext_resource path="res://scripts/MainMenu.gd" type="Script" id=7]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 8, 4, 1 )
@@ -144,6 +145,7 @@ text = "Score: 0"
 
 [node name="MainMenu" type="CanvasLayer" parent="."]
 pause_mode = 2
+script = ExtResource( 7 )
 
 [node name="Control" type="Control" parent="MainMenu"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -195,8 +197,11 @@ margin_bottom = 140.0
 theme = ExtResource( 6 )
 text = "QUIT"
 
+[node name="Tween" type="Tween" parent="MainMenu"]
+pause_mode = 2
+
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="timeout" from="SpawnPoints/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="DelArea" to="." method="_on_Area2_body_entered"]
-[connection signal="pressed" from="MainMenu/Control/VBoxContainer/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="MainMenu/Control/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="MainMenu/Control/VBoxContainer/Play" to="MainMenu" method="_on_Play_pressed"]
+[connection signal="pressed" from="MainMenu/Control/VBoxContainer/Quit" to="MainMenu" method="_on_Quit_pressed"]
