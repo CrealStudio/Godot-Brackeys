@@ -7,11 +7,6 @@ onready var spawn2 : Node = $SpawnPoints/P2
 onready var spawn3 : Node = $SpawnPoints/P3
 onready var SpawnTimer : Node = $SpawnPoints/Timer
 
-
-var can_pause : bool = true
-
-var weight :float = .1
-
 func _ready():
 	SpawnTimer.wait_time = Global.SpawnTimer
 	SpawnTimer.start()

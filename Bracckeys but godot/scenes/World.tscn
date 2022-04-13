@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Floor.tscn" type="PackedScene" id=2]
@@ -7,9 +7,6 @@
 [ext_resource path="res://assets/font/BebasNeue-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://scenes/button_theme.tres" type="Theme" id=6]
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=7]
-
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 8, 4, 1 )
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 6.25308, 4.24265, 1.70688 )
@@ -38,11 +35,6 @@ glow_intensity = 1.66
 
 [sub_resource type="BoxShape" id=4]
 
-[sub_resource type="CubeMesh" id=5]
-
-[sub_resource type="SpatialMaterial" id=6]
-albedo_color = Color( 0.215686, 0.215686, 0.215686, 0.211765 )
-
 [sub_resource type="DynamicFont" id=7]
 size = 60
 outline_size = 3
@@ -67,19 +59,12 @@ HitObjects = ExtResource( 4 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1.2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 7.75616 )
 
-[node name="Area" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.0132792, 0, 0, -49.4233 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.275031, 3.42905, -24.6046 )
-shape = SubResource( 1 )
-
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.993657, 0.112457, 0, -0.112457, 0.993657, -0.0388412, 11.1737, 24.4079 )
 current = true
 
 [node name="SpawnPoints" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6499, -110.221 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6499, -47.545 )
 
 [node name="P1" type="Position3D" parent="SpawnPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.64654, 0, -46.782 )
@@ -111,22 +96,12 @@ visible = false
 [node name="CollisionShape" type="CollisionShape" parent="Wall"]
 shape = SubResource( 4 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Wall"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.374184, 0, 0 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
-
 [node name="Wall2" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 20, 0, 0, 0, 131.112, 11.3656, 18.0352, -115.24 )
 visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Wall2"]
 shape = SubResource( 4 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Wall2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.374184, 0, 0 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
@@ -152,20 +127,17 @@ self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="MainMenu/Control"]
-self_modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.231373, 0.231373, 0.231373, 0.505882 )
-
 [node name="Label" type="Label" parent="MainMenu/Control"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = 257.0
-margin_right = 727.0
-margin_bottom = 120.0
+anchor_bottom = 4.28
+margin_left = 343.0
+margin_top = -10.0
+margin_right = 642.0
+margin_bottom = -41.2
 theme = SubResource( 9 )
-text = "UNTITLED GAME"
+text = "CUBE RUN"
 align = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/Control"]
@@ -198,9 +170,7 @@ theme = ExtResource( 6 )
 text = "QUIT"
 
 [node name="Tween" type="Tween" parent="MainMenu"]
-pause_mode = 2
 
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="timeout" from="SpawnPoints/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="DelArea" to="." method="_on_Area2_body_entered"]
 [connection signal="pressed" from="MainMenu/Control/VBoxContainer/Play" to="MainMenu" method="_on_Play_pressed"]
