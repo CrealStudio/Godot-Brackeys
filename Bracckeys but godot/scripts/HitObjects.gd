@@ -1,14 +1,12 @@
 extends KinematicBody
 
 var velocity : Vector3 = Vector3()
-var speed = Global.ObjSpeed
 
 func _physics_process(delta):
-	velocity.z = speed
+	velocity.z = Global.ObjSpeed
 	move_and_slide(velocity)
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("Player"):
-		Global.player.fling()
-		get_tree().change_scene("res://scenes/World.tscn")
+		get_tree().change_scene("res://scenes/Ui.tscn")
 		Global.score = 0

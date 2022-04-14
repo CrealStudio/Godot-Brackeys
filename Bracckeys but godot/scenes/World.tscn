@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Floor.tscn" type="PackedScene" id=2]
@@ -18,7 +18,6 @@ background_color = Color( 0.705882, 0.705882, 0.705882, 0.682353 )
 background_energy = 0.0
 ambient_light_color = Color( 0.980392, 0.980392, 0.980392, 1 )
 ambient_light_energy = 3.31
-fog_enabled = true
 fog_color = Color( 0.764706, 0.768627, 0.768627, 1 )
 fog_sun_color = Color( 0.964706, 0.654902, 0.168627, 1 )
 fog_depth_begin = 80.0
@@ -52,6 +51,157 @@ outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
 
+[sub_resource type="DynamicFont" id=10]
+size = 50
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.152941, 0.72549, 0.980392, 0.780392 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_top = 40.0
+expand_margin_bottom = 40.0
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.0156863, 0.996078, 0.92549, 0.258824 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 40.0
+expand_margin_right = 40.0
+expand_margin_top = 30.0
+expand_margin_bottom = 30.0
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.152941, 0.72549, 0.980392, 0.847059 )
+
+[sub_resource type="Theme" id=15]
+Button/constants/hseparation = 90
+Button/fonts/font = SubResource( 10 )
+Button/styles/hover = SubResource( 13 )
+Button/styles/normal = SubResource( 12 )
+Button/styles/pressed = SubResource( 14 )
+
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.619608, 0.737255, 0.133333, 0.819608 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_top = 40.0
+expand_margin_bottom = 40.0
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.803922, 1, 0, 0.337255 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 40.0
+expand_margin_right = 40.0
+expand_margin_top = 30.0
+expand_margin_bottom = 30.0
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.619608, 0.737255, 0.133333, 0.745098 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 40.0
+expand_margin_right = 40.0
+expand_margin_top = 30.0
+expand_margin_bottom = 30.0
+
+[sub_resource type="DynamicFont" id=16]
+size = 50
+font_data = ExtResource( 5 )
+
+[sub_resource type="Theme" id=17]
+default_font = SubResource( 16 )
+Button/styles/hover = SubResource( 27 )
+Button/styles/normal = SubResource( 18 )
+Button/styles/pressed = SubResource( 28 )
+
+[sub_resource type="DynamicFont" id=22]
+size = 40
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=29]
+bg_color = Color( 0.643137, 0.0156863, 0.0156863, 0.713726 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_top = 40.0
+expand_margin_bottom = 40.0
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 1, 0, 0, 0.286275 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.027451, 0.027451, 0.027451, 1 )
+expand_margin_left = 40.0
+expand_margin_right = 40.0
+expand_margin_top = 30.0
+expand_margin_bottom = 30.0
+
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 1, 0, 0, 0.494118 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_top = 40.0
+expand_margin_bottom = 40.0
+
+[sub_resource type="DynamicFont" id=20]
+font_data = ExtResource( 5 )
+
+[sub_resource type="Theme" id=21]
+default_font = SubResource( 20 )
+Button/fonts/font = SubResource( 22 )
+Button/styles/hover = SubResource( 29 )
+Button/styles/normal = SubResource( 19 )
+Button/styles/pressed = SubResource( 30 )
+
+[sub_resource type="DynamicFont" id=25]
+size = 90
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="DynamicFont" id=23]
+size = 70
+font_data = ExtResource( 5 )
+
+[sub_resource type="Theme" id=24]
+default_font = SubResource( 23 )
+Label/colors/font_color = Color( 0.858824, 0.0235294, 0.0235294, 1 )
+Label/fonts/font = SubResource( 25 )
+Label/styles/normal = SubResource( 26 )
+
 [node name="World" type="Spatial"]
 script = ExtResource( 3 )
 HitObjects = ExtResource( 4 )
@@ -60,7 +210,7 @@ HitObjects = ExtResource( 4 )
 transform = Transform( 1.2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 7.75616 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.993657, 0.112457, 0, -0.112457, 0.993657, -0.0388412, 11.1737, 24.4079 )
+transform = Transform( 1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 7.25803, 18.3747 )
 current = true
 script = ExtResource( 8 )
 
@@ -104,8 +254,6 @@ visible = false
 [node name="CollisionShape" type="CollisionShape" parent="Wall2"]
 shape = SubResource( 4 )
 
-[node name="ScoreTimer" type="Timer" parent="."]
-
 [node name="MainMenu" type="CanvasLayer" parent="."]
 pause_mode = 2
 script = ExtResource( 7 )
@@ -139,16 +287,16 @@ alignment = 1
 
 [node name="Play" type="Button" parent="MainMenu/Control/VBoxContainer"]
 margin_right = 250.0
-margin_bottom = 60.0
+margin_bottom = 70.0
 size_flags_vertical = 2
 size_flags_stretch_ratio = 0.0
 theme = ExtResource( 6 )
 text = "PLAY"
 
 [node name="Quit" type="Button" parent="MainMenu/Control/VBoxContainer"]
-margin_top = 80.0
+margin_top = 90.0
 margin_right = 250.0
-margin_bottom = 140.0
+margin_bottom = 160.0
 theme = ExtResource( 6 )
 text = "QUIT"
 
@@ -164,7 +312,63 @@ text = "Score: 0"
 
 [node name="Tween" type="Tween" parent="MainMenu"]
 
+[node name="ChooseMode" type="Control" parent="MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -1200.0
+margin_right = 20.0
+margin_bottom = -1160.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/ChooseMode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.5
+margin_top = -35.0
+margin_right = 300.5
+margin_bottom = 35.0
+custom_constants/separation = 150
+
+[node name="EASY" type="Button" parent="MainMenu/ChooseMode/HBoxContainer"]
+margin_right = 87.0
+margin_bottom = 70.0
+theme = SubResource( 15 )
+text = "EASY"
+
+[node name="HARD" type="Button" parent="MainMenu/ChooseMode/HBoxContainer"]
+margin_left = 237.0
+margin_right = 328.0
+margin_bottom = 70.0
+theme = SubResource( 17 )
+text = "HARD"
+
+[node name="EXPERT" type="Button" parent="MainMenu/ChooseMode/HBoxContainer"]
+margin_left = 478.0
+margin_right = 580.0
+margin_bottom = 70.0
+theme = SubResource( 21 )
+text = "Expert"
+
+[node name="SelectDifficulty" type="Label" parent="MainMenu/ChooseMode"]
+anchor_left = 0.462
+anchor_top = -4.5
+anchor_right = 0.462
+anchor_bottom = -4.5
+margin_left = -265.48
+margin_top = -45.0
+margin_right = 247.52
+margin_bottom = 63.0
+theme = SubResource( 24 )
+text = "SELECT DIFFICULTY"
+
 [connection signal="timeout" from="SpawnPoints/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="DelArea" to="." method="_on_Area2_body_entered"]
 [connection signal="pressed" from="MainMenu/Control/VBoxContainer/Play" to="MainMenu" method="_on_Play_pressed"]
 [connection signal="pressed" from="MainMenu/Control/VBoxContainer/Quit" to="MainMenu" method="_on_Quit_pressed"]
+[connection signal="pressed" from="MainMenu/ChooseMode/HBoxContainer/EASY" to="MainMenu" method="_on_EASY_pressed"]
+[connection signal="pressed" from="MainMenu/ChooseMode/HBoxContainer/HARD" to="MainMenu" method="_on_HARD_pressed"]
+[connection signal="pressed" from="MainMenu/ChooseMode/HBoxContainer/EXPERT" to="MainMenu" method="_on_EXPERT_pressed"]

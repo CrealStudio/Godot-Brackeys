@@ -16,7 +16,6 @@ emission_operator = 0
 emission_on_uv2 = false
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 0.9, 0.9, 0.9 )
 
 [node name="HitObjects" type="KinematicBody" groups=["HitObjects"]]
 script = ExtResource( 1 )
