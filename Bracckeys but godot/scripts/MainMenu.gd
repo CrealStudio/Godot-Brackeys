@@ -2,9 +2,12 @@ extends CanvasLayer
 
 var can_pause : bool = true
 onready var MainMenu : Control = $Control
-onready var ScoreLabel : Label = $Control/Label
+onready var ScoreLabel : Label = $ScoreLabel
 onready var PlayBtn : Button = $Control/VBoxContainer/Play
 onready var QuitBtn : Button = $Control/VBoxContainer/Quit
+onready var GameName : Label = $Control/NameLabel
+onready var tween : Tween = $Tween
+var TweenTime  : float = .8
 
 func _ready():
 	pause()
@@ -21,26 +24,24 @@ func resume():
 		get_tree().set_deferred("paused", false)
 
 func _on_Play_pressed():
-	$Tween.interpolate_property(PlayBtn, "rect_position:x", 0, 1000, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property(PlayBtn, "rect_position:x", 0, 1000, TweenTime, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
 	
-	$Tween.interpolate_property(QuitBtn, "rect_position:x", 0, -1000, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.interpolate_property(QuitBtn, "rect_position:x", 0, -1000, TweenTime, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+	
+	tween.interpolate_property(GameName, "rect_position:y", 0, -1000, TweenTime, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	
 	$Tween.start()
 	
 	yield(get_tree().create_timer(1), "timeout")
 	
 	if get_tree().paused:
-		MainMenu.visible = false
-		ScoreLabel.visible = true
 		resume()
-	else:
-		ScoreLabel.visible = false
-
-
-
-
-
-
+		MainMenu.visible = false
+		
+		
+		tween.interpolate_property(ScoreLabel, "rect_position:x", -500, 16, .5, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+		
+		
 
 func _on_Quit_pressed():
 	get_tree().quit()
