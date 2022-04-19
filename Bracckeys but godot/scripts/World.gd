@@ -8,14 +8,6 @@ onready var spawn3 : Node = $SpawnPoints/P3
 onready var SpawnTimer : Node = $SpawnPoints/Timer
 onready var mesh = $Floor/MeshInstance
 
-func _process(delta):
-	if Global.score > 10:
-		
-		var material = mesh.get_surface_material(0)
-		material.albedo_color = Color(255,20,147)
-		mesh.set_surface_material(0, material)
-		
-		Global.SpawnTimer = .1
 
 func _ready():
 	SpawnTimer.start(Global.SpawnTimer)

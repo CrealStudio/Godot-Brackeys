@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Floor.tscn" type="PackedScene" id=2]
@@ -9,8 +9,12 @@
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://scenes/Camera.gd" type="Script" id=8]
 
+[sub_resource type="Environment" id=31]
+background_energy = 0.79
+ambient_light_color = Color( 0.968627, 0.933333, 0.933333, 1 )
+
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 6.25308, 4.24265, 1.70688 )
+extents = Vector3( 13.0904, 4.24265, 2.16626 )
 
 [sub_resource type="Environment" id=3]
 background_mode = 1
@@ -18,6 +22,7 @@ background_color = Color( 0.705882, 0.705882, 0.705882, 0.682353 )
 background_energy = 0.0
 ambient_light_color = Color( 0.980392, 0.980392, 0.980392, 1 )
 ambient_light_energy = 3.31
+fog_enabled = true
 fog_color = Color( 0.764706, 0.768627, 0.768627, 1 )
 fog_sun_color = Color( 0.964706, 0.654902, 0.168627, 1 )
 fog_depth_begin = 80.0
@@ -25,7 +30,7 @@ fog_depth_end = 90.0
 fog_depth_curve = 0.378931
 fog_transmit_curve = 1.41421
 fog_height_enabled = true
-fog_height_min = 0.7
+fog_height_min = 2.0
 dof_blur_far_distance = 44.69
 dof_blur_far_transition = 556.2
 dof_blur_far_amount = 0.14
@@ -206,16 +211,20 @@ Label/styles/normal = SubResource( 26 )
 script = ExtResource( 3 )
 HitObjects = ExtResource( 4 )
 
+[node name="Floor" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 6.79072e-08, 0, -0.776767, -0.242218, 0.8, -49.8206 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1.2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 7.75616 )
+transform = Transform( 1.2, 0, 0, 0, 1, 0, 0, 0, 1, -0.0727749, 1.5, 7.89303 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 7.25803, 18.3747 )
+transform = Transform( 0.99977, -0.00977044, 0.0190742, 0, 0.89003, 0.455902, -0.021431, -0.455797, 0.889826, 0, 6.75816, 14.8355 )
+environment = SubResource( 31 )
 current = true
 script = ExtResource( 8 )
 
 [node name="SpawnPoints" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6499, -47.545 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149937, 1.53348, -55.7184 )
 
 [node name="P1" type="Position3D" parent="SpawnPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.64654, 0, -46.782 )
@@ -231,11 +240,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.78803, 0, -46.782 )
 [node name="DelArea" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="DelArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105888, 0.746415, 17.0138 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185615, 0.604938, 17.724 )
 shape = SubResource( 2 )
-
-[node name="Floor" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1.4, 0, 0, 0, 1.003, 0, 0, 0, 2.303, 0, 0, -98.7928 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
@@ -287,16 +293,16 @@ alignment = 1
 
 [node name="Play" type="Button" parent="MainMenu/Control/VBoxContainer"]
 margin_right = 250.0
-margin_bottom = 70.0
+margin_bottom = 60.0
 size_flags_vertical = 2
 size_flags_stretch_ratio = 0.0
 theme = ExtResource( 6 )
 text = "PLAY"
 
 [node name="Quit" type="Button" parent="MainMenu/Control/VBoxContainer"]
-margin_top = 90.0
+margin_top = 80.0
 margin_right = 250.0
-margin_bottom = 160.0
+margin_bottom = 140.0
 theme = ExtResource( 6 )
 text = "QUIT"
 

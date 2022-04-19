@@ -10,19 +10,26 @@ onready var tween : Tween = $Tween
 onready var ChooseUi = $ChooseMode
 var TweenTime  : float = .8
 
+
+
 func _ready():
 	pause()
 
+
 func _process(delta):
 		ScoreLabel.text = "Score: " + str(Global.score)
+
 
 func pause():
 	if can_pause:
 		get_tree().set_deferred("paused", true)
 
+
 func resume():
 	if can_pause:
 		get_tree().set_deferred("paused", false)
+
+
 
 func _on_Play_pressed():
 	tween.interpolate_property(PlayBtn, "rect_position:x", 0, 1000, TweenTime, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
@@ -33,7 +40,7 @@ func _on_Play_pressed():
 	
 	tween.start()
 	
-	yield(get_tree().create_timer(.4), "timeout")
+	yield(get_tree().create_timer(.5), "timeout")
 	
 	ChooseUi.visible = true
 	
@@ -45,6 +52,8 @@ func _on_Play_pressed():
 func _on_Quit_pressed():
 	get_tree().quit()
 
+
+
 func start_game():
 	if get_tree().paused:
 		resume()
@@ -53,33 +62,44 @@ func start_game():
 		tween.interpolate_property(ScoreLabel, "rect_position:x", -500, 16, .5, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
 		
 		tween.start()
+
+
+
+func tween_back():
+	tween.interpolate_property(ChooseUi,"rect_position:y", 280, -900, TweenTime, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	
+	tween.start()
+	
+	yield(get_tree().create_timer(.5), "timeout")
+	ChooseUi.visible = false
+
+
+
 
 func _on_EASY_pressed():
-	start_game()
-	Global.SpawnTimer = 1
 	
-	ChooseUi.visible = false
-	
-	tween.interpolate_property(ChooseUi,"rect_position:y", 280, -900, TweenTime, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-
-func _on_EXPERT_pressed():
-	start_game()
-	Global.SpawnTimer = .7
-
-	ChooseUi.visible = false
-	
-	tween.interpolate_property(ChooseUi,"rect_position:y", 280, -900, TweenTime, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-
-func _on_HARD_pressed():
 	start_game()
 	Global.SpawnTimer = .4
-	Global.ObjSpeed = 100
+	Global.ObjSpeed = 20
+	tween_back()
 
-	ChooseUi.visible = false
+func _on_HARD_pressed():
 	
-	tween.interpolate_property(ChooseUi,"rect_position:y", 280, -900, TweenTime, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	start_game()
+	Global.SpawnTimer = .1
+	Global.ObjSpeed = 50
+	tween_back()
 	
+func _on_EXPERT_pressed():
+	
+	start_game()
+	Global.SpawnTimer = .2
+	Global.ObjSpeed = 50
+	tween_back()
+	
+
+
+
 	
 	
 	
